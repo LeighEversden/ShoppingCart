@@ -1,0 +1,57 @@
+﻿@inherits LayoutComponentBase
+@page "/products";
+@using ShoppingCart.Services;
+@using ShoppingCart.Models;
+@inject BasketService BasketService;
+@inject HttpClient Http;
+
+<PageTitle>Products</PageTitle>
+
+@if (allProducts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th class="text-end">Price</th>
+                <th><span></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in allProducts)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td class="text-end">£@product.Price</td>
+                    <td class="text-end">
+                        <button @onclick="() => AddProductToBasket(product)">Add to Basket</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+
+@code {
+
+    private List<Product>? allProducts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("getting allProducts");
+        allProducts = await Http.GetFromJsonAsync<List<Product>>("sample-data/products.json");
+        Console.WriteLine("got allProducts");
+    }
+
+    private void AddProductToBasket(Product product)
+    {
+        BasketService.AddProduct(product);
+    }
+
+}

@@ -1,0 +1,62 @@
+﻿[
+  {
+    "id": 1,
+    "name": "Hat",
+    "price": 20.00
+  },
+  {
+    "id": 2,
+    "name": "Gloves",
+    "price": 10.00
+  },
+  {
+    "id": 3,
+    "name": "Shoes",
+    "price": 40.00
+  },
+  {
+    "id": 4,
+    "name": "Coat",
+    "price": 50.00
+  },
+  {
+    "id": 5,
+    "name": "Socks",
+    "price": 5.00
+  },
+  {
+    "id": 6,
+    "name": "T-Shirt",
+    "price": 25.00
+  },
+  {
+    "id": 7,
+    "name": "Jumper",
+    "price": 30.00
+  },
+  {
+    "id": 8,
+    "name": "Shorts",
+    "price": 15.00
+  },
+  {
+    "id": 9,
+    "name": "Glasses",
+    "price": 80.00
+  },
+  {
+    "id": 10,
+    "name": "Bag",
+    "price": 60.00
+  },
+  {
+    "id": 11,
+    "name": "Wallet",
+    "price": 30.00
+  },
+  {
+    "id": 12,
+    "name": "Phone",
+    "price": 1000.00
+  }
+]

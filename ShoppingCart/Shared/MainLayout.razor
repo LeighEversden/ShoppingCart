@@ -1,0 +1,42 @@
+﻿@inherits LayoutComponentBase
+@using ShoppingCart.Services
+@inject BasketService BasketService
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <a href="basket">                
+                <p class ="mb-0">Basket: £@BasketService.GetTotalCost()</p>
+            </a>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code {
+    private decimal totalCost;
+
+    protected override void OnInitialized()
+    {
+        totalCost = BasketService.GetTotalCost();
+        BasketService.OnChange += UpdateTotalCost;
+    }
+
+    private void UpdateTotalCost()
+    {
+        totalCost = BasketService.GetTotalCost();
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        BasketService.OnChange -= UpdateTotalCost;
+    }
+}

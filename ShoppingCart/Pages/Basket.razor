@@ -1,0 +1,55 @@
+﻿
+@page "/basket"
+@using ShoppingCart.Models
+@using ShoppingCart.Services
+@inject BasketService BasketService
+
+<h3>Your Basket</h3>
+
+@if (products != null && products.Any())
+{
+    <ul>
+        @foreach (var product in products)
+        {
+            <li class="mb-2">
+                <div class="d-flex flex-row align-items-center">
+                    <p class="mb-0" style="min-width: 100px;">@product.Name</p>
+                    <p class="mb-0" style="min-width: 30px;">-</p>
+                    <p class="text-end mb-0" style="min-width: 80px; margin-right: 8px;">£@product.Price</p>
+                    <button @onclick="() => BasketService.RemoveProduct(product)">Remove</button>
+                </div>
+            </li>
+
+        }
+    </ul>
+
+    <h3>Total: £@string.Format("{0:0.00}", BasketService.GetTotalCost())</h3>
+
+    @if (BasketService.GetTotalDiscounted() > 0)
+    {
+        <h4>Discount applied: -£@string.Format("{0:0.00}", BasketService.GetTotalDiscounted())</h4>
+        <h2>Total after discount: £@string.Format("{0:0.00}", BasketService.ApplyDiscount())</h2>
+    }
+
+    <input type="text" @bind="discountCode" placeholder="Enter discount code" />
+    <button @onclick="ApplyDiscountCode">Apply Discount</button>
+} else
+{
+    <p>Your basket is empty</p>
+}
+
+@code {
+    
+    private IEnumerable<Product> products;
+    private string discountCode;
+
+    protected override void OnInitialized()
+    {
+        products = BasketService.GetProducts();
+    }
+
+    private void ApplyDiscountCode()
+    {
+        BasketService.ApplyDiscountCode(discountCode);
+    }
+}
