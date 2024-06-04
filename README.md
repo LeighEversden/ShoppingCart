@@ -1,6 +1,7 @@
 ShoppingCart
 
 A simple shopping cart application built with Blazor.
+
 Description
 
 This project is a demonstration of a shopping cart application using Blazor WebAssembly. It includes features such as adding products to the cart, applying discount codes, calculating totals and unit tests.
